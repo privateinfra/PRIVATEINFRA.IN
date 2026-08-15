@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -11,6 +12,14 @@ import SearchBar from "../components/SearchBar";
 import EnquiryTable from "../components/EnquiryTable";
 import EnquiryModal from "../components/EnquiryModal";
 
+import StatsCard from "../components/StatsCard";
+import ServiceStats from "../components/ServiceStats";
+import RecentActivity from "../components/RecentActivity";
+
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:5000");
+
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -19,16 +28,32 @@ function Dashboard() {
   const [selectedContact, setSelectedContact] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-    if (!token) {
-      navigate("/admin", { replace: true });
-      return;
-    }
+  if (!token) {
+    navigate("/admin", { replace: true });
+    return;
+  }
+
+  fetchContacts();
+
+  socket.on("connect", () => {
+    console.log("🟢 Socket Connected:", socket.id);
+  });
+
+  socket.on("newEnquiry", (data) => {
+    console.log("🔔 Event Received:", data);
+
+    alert(`New Enquiry: ${data.name}`);
 
     fetchContacts();
-  }, [navigate]);
+  });
 
+  return () => {
+    socket.off("newEnquiry");
+  };
+}, [navigate]);
+  
   const fetchContacts = async () => {
     try {
 const token = localStorage.getItem("token");

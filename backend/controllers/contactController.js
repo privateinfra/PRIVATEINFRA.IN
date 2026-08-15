@@ -1,5 +1,6 @@
 import Contact from "../models/Contact.js";
 import sendEmail from "../utils/sendEmail.js";
+import sendAutoReply from "../utils/sendAutoReply.js";
 
 export const createContact = async (req, res) => {
   try {
@@ -22,6 +23,10 @@ export const createContact = async (req, res) => {
       message,
     });
 
+    const io = req.app.get("io");
+
+    io.emit("newEnquiry", contact);
+
     try {
   await sendEmail({
     name,
@@ -30,6 +35,8 @@ export const createContact = async (req, res) => {
     service,
     message,
   });
+
+  await sendAutoReply(name, email);
 
   console.log("✅ Email Sent");
 } catch (err) {

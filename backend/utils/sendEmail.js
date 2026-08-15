@@ -13,9 +13,9 @@ const sendEmail = async ({
   console.log("USER =", process.env.EMAIL_USER);
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.titan.email",
-  port: 587,
-  secure: false,
+  host: process.env.EMAIL_HOST,
+  port: 465,
+  secure: true,
   requireTLS: true,
   auth: {
     user: process.env.EMAIL_USER.trim(),

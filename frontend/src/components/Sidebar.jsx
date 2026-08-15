@@ -49,6 +49,18 @@ function Sidebar() {
         📩 Enquiries
       </Link>
 
+      <Link
+          to="/admin/testimonials"
+          style={{
+            display: "block",
+            color: "#fff",
+            marginTop: "20px",
+            textDecoration: "none",
+          }}
+        >
+          ⭐ Testimonials
+      </Link>
+
       <button
         onClick={logout}
         style={{

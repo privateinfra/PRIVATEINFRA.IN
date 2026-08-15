@@ -4,6 +4,7 @@ import Services from "../components/Services";
 import About from "../components/About";
 import WhyChoose from "../components/WhyChoose";
 import Projects from "../components/Projects";
+import TestimonialsSection from "../components/TestimonialsSection";
 import Gallery from "../components/Gallery";
 import Contact from "../components/Contact";
 
@@ -16,6 +17,7 @@ function Home() {
       <About />
       <WhyChoose />
       <Projects />
+      <TestimonialsSection />
       <Gallery />
       <Contact />
     </>

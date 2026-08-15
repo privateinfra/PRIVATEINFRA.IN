@@ -11,6 +11,7 @@ import ContactPage from "./pages/ContactPage";
 import AdminLogin from "./pages/AdminLogin";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Testimonials from "./pages/Testimonials";
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/admin/testimonials"
+          element={<Testimonials />}
+        />
         
         <Route
           path="/dashboard"

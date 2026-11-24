@@ -19,7 +19,7 @@ function AdminLogin() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/login", {
+      const res = await fetch("https://www.privateinfra.in/api/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
